@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Solverbooks Editor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/cube.png">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- SortableJS -->
+  <script src="https://SortableJS.github.io/Sortable/Sortable.js"></script>
+
+  <!-- Marked -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- HighlightJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" />
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+  <link href="highlight.css" rel="stylesheet">
+
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- App Files -->
+  <script type="module" src="script.js"></script>
+  <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <dialog id="dialog-editor" class="bg-light">
+
+    <div class="modal-body">
+      <div class="dialog-editor-lang">English</div>
+      <textarea id="content-textarea-0" class="form-control text-area"></textarea>
+      <div class="dialog-editor-lang">Português</div>
+      <textarea id="content-textarea-1" class="form-control text-area"></textarea>
+      <div class="dialog-editor-lang">Español</div>
+      <textarea id="content-textarea-2" class="form-control text-area"></textarea>
+      <p></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark m-2" id="dialog-copy" style="width:100px">Copy</button>
+      <button type="button" class="btn btn-outline-dark m-2" id="dialog-write" style="width:100px">Write</button>
+      <button type="button" class="btn btn-outline-dark m-2" id="dialog-improve" style="width:100px">Improve</button>
+      <button type="button" class="btn btn-outline-dark m-2" id="dialog-translate"
+        style="width:100px">Translate</button>
+      <button type="button" class="btn btn-info m-2" id="dialog-save" style="width:100px">Save</button>
+      <button type="button" class="btn btn-outline-danger m-2" id="dialog-close" style="width:100px">Close</button>
+    </div>
+
+  </dialog>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="row" id="screen-header"></div>
+
+
+    <!-- Links -->
+    <div class="row mt-5 pt-5">
+      <div class="d-flex">
+        <a class="p-2" href="https://dillinger.io/" target="_blank">Markdown Editor</a>
+        <a class="p-2" href="https://www.markdownguide.org/" target="_blank">Markdown Reference</a>
+        <a class="p-2" href="#" id="book-download">Download book</a>
+      </div>
+    </div>
+
+    <!-- Book -->
+    <div class="row p-2 m-1">
+      <select class="form-select" id="select-book" style="width:200px;">
+        <option value="PoUMHNXodeebo5LQnv4SmA4L1Ah1zG4AtA1t">Inteligência artificial</option>
+        <option value="yjxfP75lMmCH86yI1Bt1dGSLAm51z34AtAmz">Python para iniciantes</option>
+        <option value="VCBU5azvZbZI4L9rWk4ttzdF1131z54AtAS4">Web para iniciantes</option>
+        <option value="FHv5UzTtivfbAWXlmR4LLtLSh9314LL1hz4z">Histórias da história</option>
+      </select>
+    </div>
+
+    <!-- Input -->
+    <div class="row">
+      <div class="input-group p-4">
+        <label class="input-group-text" for="input-chapter-number">chapterNumber</label>
+        <input class="form-control text-center" id="input-chapter-number" placeholder="chapterNumber" value="1">
+        <label class="input-group-text" for="input-page-number">pageNumber</label>
+        <input class="form-control text-center" id="input-page-number" placeholder="pageNumber" value="1">
+        <label class="input-group-text" for="input-version-number">versionNumber</label>
+        <input class="form-control text-center" id="input-version-number" placeholder="versionNumber" value="1">
+        <label class="input-group-text" for="input-language">language</label>
+        <input class="form-control text-center" id="input-language" placeholder="language" value="1">
+        <button class="btn btn-outline-secondary" type="button" id="input-get" style="width:80px;">Get</button>
+        <button class="btn btn-outline-secondary" type="button" id="input-save" style="width:80px;">Save</button>
+      </div>
+    </div>
+
+    <!-- Page title -->
+    <div class="row">
+      <div class="mb-2 d-flex justify-content-between">
+        <div id="page-title" class="fs-2 p-3"></div>
+        <div id="page-order" class="p-3"></div>
+        <div id="page-active" class="p-3"></div>
+        <div class="p-3 block-icon">
+          <i id="edit-title" class="fa fa-pencil-square-o pointer"></i>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Page Blocks -->
+    <div class="row">
+      <div id="page-blocks"></div>
+    </div>
+
+    <!-- New Block -->
+    <div class="dropdown-center mb-5">
+      <div class="p-3 text-center bg-light" type="button" data-bs-toggle="dropdown" id="block-insert">
+        <i class="fa fa-plus pointer" aria-hidden="true"></i>
+      </div>
+      <div class="dropdown-menu text-center" id="dropdown-menu-new-block">
+        <a class="dropdown-item new-block" id="new-block-text" href="#">Text</a>
+        <a class="dropdown-item new-block" id="new-block-text-in" href="#">Text In</a>
+        <a class="dropdown-item new-block" id="new-block-text-in-ai" href="#">Text In AI</a>
+        <a class="dropdown-item new-block" id="new-block-code" href="#">Code</a>
+        <a class="dropdown-item new-block" id="new-block-code-in" href="#">Code In</a>
+        <a class="dropdown-item new-block" id="new-block-code-in-ai" href="#">Code In AI</a>
+        <a class="dropdown-item new-block" id="new-block-quiz" href="#">Quiz</a>
+        <a class="dropdown-item new-block" id="new-block-quiz-ai" href="#">Quiz AI</a>
+        <a class="dropdown-item new-block" id="new-block-image" href="#">Image</a>
+        <a class="dropdown-item new-block" id="new-block-youtube" href="#">Youtube</a>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>

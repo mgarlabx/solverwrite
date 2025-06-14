@@ -1,0 +1,46 @@
+.pointer {
+    cursor: pointer;
+}
+
+#dialog-editor {
+    border: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+    width: 80%;
+    height: 80%;
+}
+
+.dialog-editor-lang {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.youtube-video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    text-align: center;
+}
+
+.youtube-video-container iframe {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+textarea { 
+    height: 18vh; 
+    tab-size: 4;
+}
+
+
